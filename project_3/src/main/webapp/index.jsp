@@ -12,7 +12,7 @@
 body {
 	background-image: url('img/onlineresultsys.jpg');
 	background-size: cover;
-	background-repeat: no-repeat;
+	background-repeat: no-repeat; 
 }
 </style>
 <body class="img-fluids">

@@ -18,13 +18,13 @@ public class UserModelTest {
 	//public static UserModelInt model = new UserModelJDBCImpl();
 
 	public static void main(String[] args) throws Exception {
-		addTest();
+//		addTest();
 		//updateTest();
 		//deleteTest();
 		// findByPKTest(); 
 		 //findByLoginTest();
 		 //listTest();
-		// searchTest(); 
+		 searchTest(); 
 	}
 
 	private static void findByLoginTest() throws ApplicationException {

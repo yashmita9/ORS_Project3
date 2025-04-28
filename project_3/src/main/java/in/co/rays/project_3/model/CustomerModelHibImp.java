@@ -20,52 +20,43 @@ public class CustomerModelHibImp implements CustomerModelInt {
 	public long add(CustomerDTO dto) throws ApplicationException, DuplicateRecordException {
 		Session session = null;
 		Transaction tx = null;
-		long pk = 0;
-		
 		try {
 			session = HibDataSource.getSession();
 			tx = session.beginTransaction();
 			session.save(dto);
-			pk = dto.getId();
 			tx.commit();
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			// TODO: handle exception
 			if (tx != null) {
 				tx.rollback();
-
 			}
-			throw new ApplicationException("Exception in customer Add " + e.getMessage());
+			throw new ApplicationException("Exception in college Add " + e.getMessage());
 		} finally {
 			session.close();
 		}
-		return pk;
+		return dto.getId();
 	}
 
 	@Override
 	public void delete(CustomerDTO dto) throws ApplicationException {
-		// TODO Auto-generated method stub
+
 		Session session = null;
 		Transaction tx = null;
-		
+
 		try {
 			session = HibDataSource.getSession();
 			tx = session.beginTransaction();
 			session.delete(dto);
 			tx.commit();
-		}catch (HibernateException e) {
-			e.printStackTrace();
-			// TODO: handle exception
+		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();
-
 			}
-			throw new ApplicationException("Exception in customer delete " + e.getMessage());
+			throw new ApplicationException("Exception in college delete " + e.getMessage());
 		} finally {
 			session.close();
 		}
 
-		
 	}
 
 	@Override
@@ -75,23 +66,19 @@ public class CustomerModelHibImp implements CustomerModelInt {
 		try {
 			session = HibDataSource.getSession();
 			tx = session.beginTransaction();
-			session.update(dto);
+			session.saveOrUpdate(dto);
 			tx.commit();
-
 		} catch (HibernateException e) {
-			e.printStackTrace();
 			// TODO: handle exception
+			e.printStackTrace();
 			if (tx != null) {
 				tx.rollback();
-
 			}
-			throw new ApplicationException("Exception in customer update " + e.getMessage());
+			throw new ApplicationException("Exception in college update " + e.getMessage());
 		} finally {
 			session.close();
 		}
 
-
-		
 	}
 
 	@Override
@@ -114,78 +101,55 @@ public class CustomerModelHibImp implements CustomerModelInt {
 			}
 			list = criteria.list();
 		} catch (HibernateException e) {
-
-			throw new ApplicationException("Exception : Exception in  Customer list");
+			// TODO: handle exception
+			throw new ApplicationException("Exception in college Add " + e.getMessage());
 		} finally {
 			session.close();
 		}
 		return list;
-
 	}
 
 	@Override
 	public List search(CustomerDTO dto) throws ApplicationException {
+		// TODO Auto-generated method stub
 		return search(dto, 0, 0);
 	}
 
 	@Override
 	public List search(CustomerDTO dto, int pageNo, int pageSize) throws ApplicationException {
 		Session session = null;
-        List list = null;
-        try {
-            session = HibDataSource.getSession();
-            Criteria criteria = session.createCriteria(CustomerDTO.class);
+		List list = null;
+		try {
+			session = HibDataSource.getSession();
+			Criteria criteria = session.createCriteria(CustomerDTO.class);
+			if (dto.getId() > 0) {
+				criteria.add(Restrictions.eq("id", dto.getId()));
+			}
+			if (dto.getClienName() != null && dto.getClienName().length() > 0) {
+				criteria.add(Restrictions.like("clienName", dto.getClienName() + "%"));
+			}
 
-            if (dto.getId() > 0) {
-                criteria.add(Restrictions.eq("id", dto.getId()));
-            }
-            if (dto.getClienName() != null && dto.getClienName().length() > 0) {
-                criteria.add(Restrictions.like("clientName", dto.getClienName() + "%"));
-            }
-            if (dto.getLocation() != null && dto.getLocation().length() > 0) {
-                criteria.add(Restrictions.like("location", dto.getLocation()
-                        + "%"));
-            }
-            if (dto.getContactNo() != null && dto.getContactNo().length() > 0) {
-                criteria.add(Restrictions.like("contactNo", dto.getContactNo() + "%"));
-            }
-            
-
-            // if page size is greater than zero the apply pagination
-            if (pageSize > 0) {
-                criteria.setFirstResult(((pageNo - 1) * pageSize));
-                criteria.setMaxResults(pageSize);
-            }
-
-            list = criteria.list();
-        } catch (HibernateException e) {
-            
-            throw new ApplicationException("Exception in Customer search");
-        } finally {
-            session.close();
-        }
-
-       
-        return list;
+			if (dto.getLocation() != null && dto.getLocation().length() > 0) {
+				criteria.add(Restrictions.like("location", dto.getLocation() + ""));
+			}
+			if (pageSize > 0) {
+				criteria.setFirstResult((pageNo - 1) * pageSize);
+				criteria.setMaxResults(pageSize);
+			}
+			list = criteria.list();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			throw new ApplicationException("Exception in college search");
+		} finally {
+			session.close();
+		}
+		return list;
 	}
 
 	@Override
 	public CustomerDTO findByPK(long pk) throws ApplicationException {
-		System.out.println("======"+pk);
-		Session session = null;
-		CustomerDTO dto = null;
-		try {
-			session = HibDataSource.getSession();
-
-			dto = (CustomerDTO) session.get(CustomerDTO.class, pk);
-		} catch (HibernateException e) {
-
-			throw new ApplicationException("Exception : Exception in getting customer by pk");
-		} finally {
-			session.close();
-		}
-		System.out.println("-------"+dto);
-		return dto;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

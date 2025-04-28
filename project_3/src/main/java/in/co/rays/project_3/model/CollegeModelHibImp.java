@@ -37,7 +37,7 @@ public class CollegeModelHibImp implements CollegeModelInt {
 			if (tx != null) {
 				tx.rollback();
 
-			}
+		}
 			throw new ApplicationException("Exception in college Add " + e.getMessage());
 		} finally {
 			session.close();

@@ -197,6 +197,8 @@
 						class="btn btn-warning btn-md" style="font-size: 17px"
 						style="padding: 5px;" value="<%=UserListCtl.OP_NEXT%>"
 						<%=(nextPageSize != 0) ? "" : "disabled"%>></td>
+						
+						
 				</tr>
 				<tr></tr>
 			</table>

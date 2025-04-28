@@ -104,7 +104,6 @@ i.css {
 									<%
 										}
 									%>
-
 								</H4>
 								<%
 									String uri = (String) request.getAttribute("uri");

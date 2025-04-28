@@ -95,7 +95,8 @@ public class UserModelHibImp implements UserModelInt {
 		UserDTO existDto = findByLogin(dto.getLogin());
 		// Check if updated LoginId already exist
 		if (existDto != null && existDto.getId() != dto.getId()) {
-			// throw new DuplicateRecordException("LoginId is already exist");
+			System.out.println("in duplicate reocord  condition model update");
+			 throw new DuplicateRecordException("LoginId is already exist");
 		}
 
 		try {
@@ -217,9 +218,9 @@ public class UserModelHibImp implements UserModelInt {
 				if (dto.getGender() != null && dto.getGender().length() > 0) {
 					criteria.add(Restrictions.like("gender", dto.getGender() + "%"));
 				}
-				if (dto.getDob() != null && dto.getDob().getDate() > 0) {
+				if (dto.getDob() != null && dto.getDob().getTime() > 0) {
 					criteria.add(Restrictions.eq("dob", dto.getDob()));
-				}
+				}    
 				if (dto.getLastLogin() != null && dto.getLastLogin().getTime() > 0) {
 					criteria.add(Restrictions.eq("lastLogin", dto.getLastLogin()));
 				}

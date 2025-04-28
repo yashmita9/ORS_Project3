@@ -291,7 +291,7 @@ public class MarksheetModelJDBCImpl implements MarksheetModelInt {
 		
 		ArrayList list = new ArrayList();
 		StringBuffer sql = new StringBuffer(
-				"select ID,ROLL_NO,NAME,PHYSICS,CHEMISTRY,MATHS (PHYSICS+CHEMISTRY+MATHS)as Total from st_marksheet order by Total desc ");
+				"select ID,ROLL_NO,NAME,PHYSICS,CHEMISTRY,MATHS,(PHYSICS+CHEMISTRY+MATHS)as Total from st_marksheet order by Total desc");
 		if(pageSize>0){
 			pageNo=(pageNo-1)*pageSize;
 			sql.append(" limit "+pageNo+","+pageSize);

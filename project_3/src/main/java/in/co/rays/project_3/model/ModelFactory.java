@@ -68,6 +68,7 @@ public final class ModelFactory {
 			modelCache.put("collegeModel", collegeModel);
 		}
 		return collegeModel;
+	
 	}
 
 	public RoleModelInt getRoleModel() {
@@ -100,6 +101,7 @@ public final class ModelFactory {
 
 		return userModel;
 	}
+	
 
 	public StudentModelInt getStudentModel() {
 		StudentModelInt studentModel = (StudentModelInt) modelCache.get("studentModel");
@@ -145,6 +147,8 @@ public final class ModelFactory {
 
 		return customerModel;
 	}
+	
+	
 
 	public TimetableModelInt getTimetableModel() {
 
